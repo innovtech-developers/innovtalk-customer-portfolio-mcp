@@ -7,7 +7,7 @@ Obrigado pelo interesse! Correções, melhorias na documentação e novas ideias
 - **Bug ou dúvida:** abra uma issue descrevendo o que aconteceu, o que esperava e como reproduzir.
   Nunca cole telefones reais, links de planilha ou a sua `API_KEY`.
 - **Mudança de comportamento ou funcionalidade nova:** abra uma issue antes do PR para alinharmos a ideia.
-  O projeto é propositalmente pequeno — sem dependências em produção e um único arquivo (`worker.ts`).
+  O projeto é propositalmente pequeno — sem dependências em produção e um único arquivo (`src/worker.ts`).
 
 ## Ambiente
 
@@ -47,7 +47,7 @@ planilha quebra a configuração de quem já usa.
 - Formatação e lint pelo **Biome**: o hook `pre-commit` formata os arquivos alterados.
 - Antes do push, o hook `pre-push` roda typecheck e testes.
 - Sem dependências de produção: o Worker usa só APIs da plataforma (`fetch`, Web Crypto).
-- Toda lógica nova vem com teste em `worker.test.ts`.
+- Toda lógica nova vem com teste em `src/worker.test.ts`.
 - Comentários e documentação em português; nomes de código em inglês.
 
 ## Pull requests
