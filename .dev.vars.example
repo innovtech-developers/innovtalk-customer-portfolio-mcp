@@ -1,0 +1,11 @@
+# Copie para .dev.vars (ignorado pelo git) e preencha: cp .dev.vars.example .dev.vars
+# Usado só pelo `npx wrangler dev`. Em produção, use `npx wrangler secret put`.
+
+# Link da planilha compartilhada como "Qualquer pessoa com o link" (aba certa aberta)
+SHEET_URL=https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA/edit#gid=0
+
+# Qualquer valor serve localmente; envie o mesmo no cabeçalho X-Api-Key
+API_KEY=chave-local-de-teste
+
+# Opcional: de quanto em quanto tempo (segundos) a planilha é relida. Padrão: 60
+# CACHE_SECONDS=10

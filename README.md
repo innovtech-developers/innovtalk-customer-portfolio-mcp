@@ -247,14 +247,31 @@ pnpm lint           # Biome
 pnpm typecheck
 ```
 
-Para rodar localmente, crie um `.dev.vars` (já ignorado pelo git):
+### Testar localmente
 
-```text
-SHEET_URL=https://docs.google.com/spreadsheets/d/.../edit#gid=0
-API_KEY=uma-chave-local
+```bash
+cp .dev.vars.example .dev.vars    # preencha SHEET_URL com uma planilha de teste
+npx wrangler dev                  # sobe em http://localhost:8787
 ```
 
-e rode `npx wrangler dev`. Depois de mudar o `wrangler.toml`, gere os tipos de novo com `npx wrangler types`.
+Em outro terminal, simule as chamadas que o InnovTalk faz (use a `API_KEY` do seu `.dev.vars`):
+
+```bash
+# Lista a ferramenta
+curl -X POST http://localhost:8787 \
+  -H 'X-Api-Key: chave-local-de-teste' -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+
+# Consulta os responsáveis de um telefone da planilha
+curl -X POST http://localhost:8787 \
+  -H 'X-Api-Key: chave-local-de-teste' -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"consultar_atendente_responsavel","arguments":{"phone":"5511987654321"}}}'
+```
+
+Resposta vazia (`{"responsaveis":[]}`) com a planilha preenchida? Veja o terminal do `wrangler dev`: erros ao
+ler a planilha aparecem lá. Para ver alterações da planilha mais rápido, use `CACHE_SECONDS=10`.
+
+Depois de mudar o `wrangler.toml`, gere os tipos de novo com `npx wrangler types`.
 
 ## Contribuindo
 
