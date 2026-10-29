@@ -1,0 +1,24 @@
+# Commits semânticos em inglês (Conventional Commits). Sem commitlint: um regex resolve.
+commit-msg:
+  commands:
+    conventional-commit:
+      run: |
+        head -1 {1} | grep -qE '^((feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9._-]+\))?!?: .{1,100}|Merge .+|Revert .+)$' || {
+          echo "Commit message must follow Conventional Commits, e.g. 'fix(sheet): ignore rows without phone'"
+          exit 1
+        }
+
+pre-commit:
+  commands:
+    biome:
+      glob: "*.{ts,json,jsonc,md}"
+      run: pnpm exec biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    typecheck:
+      run: pnpm typecheck
+    test:
+      run: pnpm test

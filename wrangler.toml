@@ -1,0 +1,8 @@
+name = "innovtalk-customer-portfolio-mcp"
+main = "worker.ts"
+compatibility_date = "2025-09-01"
+
+[observability]
+enabled = true
+
+# SHEET_URL e API_KEY são secrets: `wrangler secret put SHEET_URL` / `wrangler secret put API_KEY`
